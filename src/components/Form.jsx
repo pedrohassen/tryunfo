@@ -6,7 +6,8 @@ export class Form extends Component {
     const {
       cardName,
       cardDescription,
-      cardAttr1, cardAttr2,
+      cardAttr1,
+      cardAttr2,
       cardAttr3,
       cardImage,
       cardRare,
@@ -22,7 +23,7 @@ export class Form extends Component {
           Card Name:
           <input
             type="text"
-            name="card-name"
+            name="cardName"
             id="card-name"
             data-testid="name-input"
             value={ cardName }
@@ -32,7 +33,7 @@ export class Form extends Component {
         <label htmlFor="card-desc">
           Card Description:
           <textarea
-            name="card-desc"
+            name="cardDescription"
             id="card-desc"
             cols="30"
             rows="10"
@@ -45,7 +46,7 @@ export class Form extends Component {
           Attribute 1:
           <input
             type="number"
-            name="card-attr1"
+            name="cardAttr1"
             id="card-attr1"
             data-testid="attr1-input"
             value={ cardAttr1 }
@@ -56,7 +57,7 @@ export class Form extends Component {
           Attribute 2:
           <input
             type="number"
-            name="card-attr2"
+            name="cardAttr2"
             id="card-attr2"
             data-testid="attr2-input"
             value={ cardAttr2 }
@@ -67,7 +68,7 @@ export class Form extends Component {
           Attribute 3:
           <input
             type="number"
-            name="card-attr3"
+            name="cardAttr3"
             id="card-attr3"
             data-testid="attr3-input"
             value={ cardAttr3 }
@@ -78,7 +79,7 @@ export class Form extends Component {
           Card Image:
           <input
             type="text"
-            name="card-image"
+            name="cardImage"
             id="card-image"
             data-testid="image-input"
             value={ cardImage }
@@ -88,7 +89,7 @@ export class Form extends Component {
         <label htmlFor="card-rarity">
           Card Rarity:
           <select
-            name="card-rarity"
+            name="cardRare"
             id="card-rarity"
             data-testid="rare-input"
             value={ cardRare }
@@ -100,19 +101,19 @@ export class Form extends Component {
           </select>
         </label>
         <label htmlFor="super-trunfo">
-          Super Trunfo?
+          Super Trunfo:
           <input
             type="checkbox"
-            name="super-trunfo"
+            name="cardTrunfo"
             id="super-trunfo"
-            checked
+            checked={ cardTrunfo }
             data-testid="trunfo-input"
-            value={ cardTrunfo }
             onChange={ onInputChange }
           />
         </label>
         <button
           type="submit"
+          name=""
           data-testid="save-button"
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }
