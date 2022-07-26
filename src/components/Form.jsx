@@ -113,7 +113,7 @@ export class Form extends Component {
         </label>
         <button
           type="submit"
-          name=""
+          name="submitButton"
           data-testid="save-button"
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }

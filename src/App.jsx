@@ -7,6 +7,12 @@ class App extends Component {
     super();
 
     this.state = {
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '',
+      cardAttr2: '',
+      cardAttr3: '',
+      cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
@@ -18,6 +24,31 @@ class App extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
+    }, () => this.validateSaveButton());
+  }
+
+  validateSaveButton = () => {
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+    } = this.state;
+    const attrSum = 210;
+    const maxAttr = 90;
+    if ([cardName.length, cardDescription.length, cardImage.length]
+      .some((val) => val === 0)
+      || (+cardAttr1 + +cardAttr2 + +cardAttr3)
+      > attrSum
+      || [+cardAttr1, +cardAttr2, +cardAttr3]
+        .some((val) => val > maxAttr || val < 0)) {
+      return this.setState({
+        isSaveButtonDisabled: true,
+      });
+    } this.setState({
+      isSaveButtonDisabled: false,
     });
   }
 
