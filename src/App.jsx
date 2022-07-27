@@ -25,7 +25,7 @@ class App extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
-    }, () => this.validateSaveButton());
+    }, this.validateSaveButton);
   }
 
   validateSaveButton = () => {
@@ -66,7 +66,13 @@ class App extends Component {
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
-    }));
+    }), this.checkTrunfo);
+  }
+
+  checkTrunfo = () => {
+    const { cards } = this.state;
+    const hasTrunfo = cards.some(({ cardTrunfo }) => cardTrunfo);
+    this.setState({ hasTrunfo });
   }
 
   render() {
@@ -79,7 +85,7 @@ class App extends Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      // hasTrunfo,
+      hasTrunfo,
       isSaveButtonDisabled,
     } = this.state;
     return (
@@ -94,6 +100,7 @@ class App extends Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.saveCard }
