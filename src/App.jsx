@@ -19,6 +19,8 @@ class App extends Component {
       cards: [],
       nameFilter: '',
       rareFilter: '',
+      superFilter: false,
+      disabled: false,
     };
   }
 
@@ -99,6 +101,13 @@ class App extends Component {
     if (target.value === 'muito raro') return this.setState({ rareFilter: 'muito raro' });
   }
 
+  superFilter = ({ target }) => {
+    if (!target.checked) {
+      return this.setState({ superFilter: target.checked, disabled: false });
+    }
+    this.setState({ superFilter: target.checked, disabled: true });
+  }
+
   render() {
     const {
       cardName,
@@ -114,6 +123,8 @@ class App extends Component {
       cards,
       nameFilter,
       rareFilter,
+      superFilter,
+      disabled,
     } = this.state;
     return (
       <main>
@@ -133,6 +144,8 @@ class App extends Component {
           onSaveButtonClick={ this.saveCard }
           nameFilter={ this.nameFilter }
           rareFilter={ this.rareFilter }
+          superFilter={ this.superFilter }
+          disabled={ disabled }
         />
         <Cards
           cardName={ cardName }
@@ -144,7 +157,8 @@ class App extends Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        {cards.filter((card) => card.cardRare.startsWith(rareFilter))
+        {cards.filter((card) => card.cardTrunfo === superFilter || card.cardTrunfo)
+          .filter((card) => card.cardRare.startsWith(rareFilter))
           .filter((card) => card.cardName.includes(nameFilter)).map((card) => (
             <div key={ card.cardName }>
               <Cards

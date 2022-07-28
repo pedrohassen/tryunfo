@@ -18,6 +18,8 @@ export class Form extends Component {
       onSaveButtonClick,
       nameFilter,
       rareFilter,
+      superFilter,
+      disabled,
     } = this.props;
     return (
       <form>
@@ -133,6 +135,7 @@ export class Form extends Component {
             id="nameFilter"
             data-testid="name-filter"
             onChange={ nameFilter }
+            disabled={ disabled }
           />
         </label>
         <label htmlFor="rareFilter">
@@ -142,12 +145,23 @@ export class Form extends Component {
             id="rareFilter"
             data-testid="rare-filter"
             onChange={ rareFilter }
+            disabled={ disabled }
           >
             <option value="todas" checked>Todas</option>
             <option value="normal">Normal</option>
             <option value="raro">Raro</option>
             <option value="muito raro">Muito Raro</option>
           </select>
+        </label>
+        <label htmlFor="superFilter">
+          Por Super Trunfo:
+          <input
+            type="checkbox"
+            name="superFilter"
+            id="superFilter"
+            data-testid="trunfo-filter"
+            onChange={ superFilter }
+          />
         </label>
       </form>
     );
@@ -167,12 +181,18 @@ Form.propTypes = {
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
-  nameFilter: PropTypes.func.isRequired,
-  rareFilter: PropTypes.func.isRequired,
+  nameFilter: PropTypes.func,
+  rareFilter: PropTypes.func,
+  superFilter: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 Form.defaultProps = {
   hasTrunfo: false,
+  nameFilter: '',
+  rareFilter: '',
+  superFilter: false,
+  disabled: false,
 };
 
 export default Form;
