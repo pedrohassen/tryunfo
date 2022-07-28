@@ -103,9 +103,19 @@ class App extends Component {
 
   superFilter = ({ target }) => {
     if (!target.checked) {
-      return this.setState({ superFilter: target.checked, disabled: false });
+      return this.setState({
+        nameFilter: '',
+        rareFilter: '',
+        superFilter: target.checked,
+        disabled: false,
+      });
     }
-    this.setState({ superFilter: target.checked, disabled: true });
+    this.setState({
+      nameFilter: '',
+      rareFilter: '',
+      superFilter: target.checked,
+      disabled: true,
+    });
   }
 
   render() {
