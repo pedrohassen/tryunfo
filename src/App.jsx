@@ -9,9 +9,9 @@ class App extends Component {
     this.state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
@@ -75,6 +75,17 @@ class App extends Component {
     this.setState({ hasTrunfo });
   }
 
+  deleteCard = (e) => {
+    e.preventDefault();
+    const { cards } = this.state;
+    const filter = cards.filter((card) => card.cardName !== e.target.id);
+    const paizao = e.target.parentNode;
+    this.setState({ cards: filter }, () => {
+      paizao.remove();
+      this.checkTrunfo();
+    });
+  }
+
   render() {
     const {
       cardName,
@@ -116,18 +127,27 @@ class App extends Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        {cards.map((card, index) => (
-          <Cards
-            key={ index }
-            cardName={ card.cardName }
-            cardDescription={ card.cardDescription }
-            cardAttr1={ card.cardAttr1 }
-            cardAttr2={ card.cardAttr2 }
-            cardAttr3={ card.cardAttr3 }
-            cardImage={ card.cardImage }
-            cardRare={ card.cardRare }
-            cardTrunfo={ card.cardTrunfo }
-          />
+        {cards.map((card) => (
+          <div key={ card.cardName }>
+            <Cards
+              cardName={ card.cardName }
+              cardDescription={ card.cardDescription }
+              cardAttr1={ card.cardAttr1 }
+              cardAttr2={ card.cardAttr2 }
+              cardAttr3={ card.cardAttr3 }
+              cardImage={ card.cardImage }
+              cardRare={ card.cardRare }
+              cardTrunfo={ card.cardTrunfo }
+            />
+            <button
+              id={ card.cardName }
+              type="submit"
+              data-testid="delete-button"
+              onClick={ this.deleteCard }
+            >
+              Excluir
+            </button>
+          </div>
         ))}
       </main>
     );
