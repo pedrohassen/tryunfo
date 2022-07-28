@@ -16,6 +16,7 @@ export class Form extends Component {
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
+      nameFilter,
     } = this.props;
     return (
       <form>
@@ -122,6 +123,16 @@ export class Form extends Component {
         >
           Salvar
         </button>
+        <label htmlFor="nameFilter">
+          Busca por nome:
+          <input
+            type="text"
+            name="nameFilter"
+            id="nameFilter"
+            data-testid="name-filter"
+            onChange={ nameFilter }
+          />
+        </label>
       </form>
     );
   }
@@ -136,10 +147,15 @@ Form.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
-  hasTrunfo: PropTypes.bool.isRequired,
+  hasTrunfo: PropTypes.bool,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
+  nameFilter: PropTypes.func.isRequired,
+};
+
+Form.defaultProps = {
+  hasTrunfo: false,
 };
 
 export default Form;

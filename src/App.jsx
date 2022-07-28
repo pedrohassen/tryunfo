@@ -17,6 +17,7 @@ class App extends Component {
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       cards: [],
+      filteredCards: [],
     };
   }
 
@@ -79,11 +80,20 @@ class App extends Component {
     e.preventDefault();
     const { cards } = this.state;
     const filter = cards.filter((card) => card.cardName !== e.target.id);
-    const paizao = e.target.parentNode;
+    const cardToRemove = e.target.parentNode;
     this.setState({ cards: filter }, () => {
-      paizao.remove();
+      cardToRemove.remove();
       this.checkTrunfo();
     });
+  }
+
+  nameFilter = ({ target }) => {
+    const { cards } = this.state;
+    const searchFilter = cards.filter((card) => card.cardName
+      .includes(target.value));
+    console.log(searchFilter);
+    if (searchFilter.length) return this.setState({ filteredCards: searchFilter });
+    this.setState({ filteredCards: [''] });
   }
 
   render() {
@@ -99,6 +109,7 @@ class App extends Component {
       hasTrunfo,
       isSaveButtonDisabled,
       cards,
+      filteredCards,
     } = this.state;
     return (
       <main>
@@ -116,6 +127,7 @@ class App extends Component {
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.saveCard }
+          nameFilter={ this.nameFilter }
         />
         <Cards
           cardName={ cardName }
@@ -127,7 +139,7 @@ class App extends Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        {cards.map((card) => (
+        {filteredCards.length ? filteredCards.map((card) => (
           <div key={ card.cardName }>
             <Cards
               cardName={ card.cardName }
@@ -148,7 +160,29 @@ class App extends Component {
               Excluir
             </button>
           </div>
-        ))}
+        ))
+          : cards.map((card) => (
+            <div key={ card.cardName }>
+              <Cards
+                cardName={ card.cardName }
+                cardDescription={ card.cardDescription }
+                cardAttr1={ card.cardAttr1 }
+                cardAttr2={ card.cardAttr2 }
+                cardAttr3={ card.cardAttr3 }
+                cardImage={ card.cardImage }
+                cardRare={ card.cardRare }
+                cardTrunfo={ card.cardTrunfo }
+              />
+              <button
+                id={ card.cardName }
+                type="submit"
+                data-testid="delete-button"
+                onClick={ this.deleteCard }
+              >
+                Excluir
+              </button>
+            </div>
+          ))}
       </main>
     );
   }
