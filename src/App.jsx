@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Cards from './components/Card';
 import Forms from './components/Form';
+import './css/App.css';
 
 class App extends Component {
   constructor() {
@@ -137,8 +138,8 @@ class App extends Component {
       disabled,
     } = this.state;
     return (
-      <main>
-        <h1>Super-Tryunfo</h1>
+      <main className="main-container">
+        <h1 className="title">Super-Tryunfo</h1>
         <Forms
           cardName={ cardName }
           cardDescription={ cardDescription }

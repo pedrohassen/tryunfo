@@ -22,7 +22,7 @@ export class Form extends Component {
       disabled,
     } = this.props;
     return (
-      <form>
+      <form className="forms-container">
         <label htmlFor="card-name">
           Card Name:
           <input
