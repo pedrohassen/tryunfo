@@ -23,9 +23,10 @@ export class Form extends Component {
     } = this.props;
     return (
       <form className="forms-container">
-        <label htmlFor="card-name">
+        <label className="forms-container" htmlFor="card-name">
           Card Name:
           <input
+            className="type-input"
             type="text"
             name="cardName"
             id="card-name"
@@ -34,9 +35,10 @@ export class Form extends Component {
             onChange={ onInputChange }
           />
         </label>
-        <label htmlFor="card-desc">
+        <label className="forms-container" htmlFor="card-desc">
           Card Description:
           <textarea
+            className="type-textarea"
             name="cardDescription"
             id="card-desc"
             cols="30"
@@ -46,9 +48,10 @@ export class Form extends Component {
             onChange={ onInputChange }
           />
         </label>
-        <label htmlFor="card-attr1">
+        <label className="forms-container" htmlFor="card-attr1">
           Attribute 1:
           <input
+            className="type-attr"
             type="number"
             name="cardAttr1"
             id="card-attr1"
@@ -57,9 +60,10 @@ export class Form extends Component {
             onChange={ onInputChange }
           />
         </label>
-        <label htmlFor="card-attr2">
+        <label className="forms-container" htmlFor="card-attr2">
           Attribute 2:
           <input
+            className="type-attr"
             type="number"
             name="cardAttr2"
             id="card-attr2"
@@ -68,9 +72,10 @@ export class Form extends Component {
             onChange={ onInputChange }
           />
         </label>
-        <label htmlFor="card-attr3">
+        <label className="forms-container" htmlFor="card-attr3">
           Attribute 3:
           <input
+            className="type-attr"
             type="number"
             name="cardAttr3"
             id="card-attr3"
@@ -79,9 +84,10 @@ export class Form extends Component {
             onChange={ onInputChange }
           />
         </label>
-        <label htmlFor="card-image">
+        <label className="forms-container" htmlFor="card-image">
           Card Image:
           <input
+            className="type-image"
             type="text"
             name="cardImage"
             id="card-image"
@@ -90,9 +96,10 @@ export class Form extends Component {
             onChange={ onInputChange }
           />
         </label>
-        <label htmlFor="card-rarity">
+        <label className="forms-container" htmlFor="card-rarity">
           Card Rarity:
           <select
+            className="type-rarity"
             name="cardRare"
             id="card-rarity"
             data-testid="rare-input"
@@ -105,9 +112,10 @@ export class Form extends Component {
           </select>
         </label>
         {hasTrunfo ? <p>Você já tem um Super Trunfo em seu baralho</p> : (
-          <label htmlFor="super-trunfo">
+          <label className="label-strunfo" htmlFor="super-trunfo">
             Super Trunfo:
             <input
+              className="checkbox"
               type="checkbox"
               name="cardTrunfo"
               id="super-trunfo"
@@ -118,18 +126,20 @@ export class Form extends Component {
           </label>
         )}
         <button
-          type="submit"
+          className="save-btn"
+          type="button"
           name="submitButton"
           data-testid="save-button"
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }
         >
-          Salvar
+          Save
         </button>
-        <p>Busca:</p>
-        <label htmlFor="nameFilter">
-          Por nome:
+        <p className="forms-container">Search:</p>
+        <label className="forms-container" htmlFor="nameFilter">
+          By name:
           <input
+            className="type-input"
             type="text"
             name="nameFilter"
             id="nameFilter"
@@ -138,24 +148,26 @@ export class Form extends Component {
             disabled={ disabled }
           />
         </label>
-        <label htmlFor="rareFilter">
-          Por raridade:
+        <label className="forms-container" htmlFor="rareFilter">
+          By rarity:
           <select
+            className="type-rarity"
             name="rareFilter"
             id="rareFilter"
             data-testid="rare-filter"
             onChange={ rareFilter }
             disabled={ disabled }
           >
-            <option value="todas" checked>Todas</option>
+            <option value="todas" checked>All</option>
             <option value="normal">Normal</option>
-            <option value="raro">Raro</option>
-            <option value="muito raro">Muito Raro</option>
+            <option value="raro">Rare</option>
+            <option value="muito raro">Very Rare</option>
           </select>
         </label>
-        <label htmlFor="superFilter">
-          Por Super Trunfo:
+        <label className="label-strunfo" htmlFor="superFilter">
+          By Super Trunfo:
           <input
+            className="checkbox"
             type="checkbox"
             name="superFilter"
             id="superFilter"
@@ -181,16 +193,14 @@ Form.propTypes = {
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
-  nameFilter: PropTypes.func,
-  rareFilter: PropTypes.func,
+  nameFilter: PropTypes.func.isRequired,
+  rareFilter: PropTypes.func.isRequired,
   superFilter: PropTypes.func,
   disabled: PropTypes.bool,
 };
 
 Form.defaultProps = {
   hasTrunfo: false,
-  nameFilter: '',
-  rareFilter: '',
   superFilter: false,
   disabled: false,
 };

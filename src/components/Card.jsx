@@ -16,14 +16,54 @@ export class Card extends Component {
 
     return (
       <div className="cards-container">
-        <h2 data-testid="name-card">{ cardName }</h2>
-        <img src={ cardImage } alt={ cardName } data-testid="image-card" />
-        <p data-testid="description-card">{ cardDescription }</p>
-        <p data-testid="attr1-card">{ cardAttr1 }</p>
-        <p data-testid="attr2-card">{ cardAttr2 }</p>
-        <p data-testid="attr3-card">{ cardAttr3 }</p>
-        <p data-testid="rare-card">{ cardRare }</p>
-        {!cardTrunfo ? '' : <p data-testid="trunfo-card">Super Trunfo</p>}
+        <div className="card-container">
+          <h2 data-testid="name-card"><span className="cardTitle">{ cardName }</span></h2>
+          <img
+            className="image"
+            src={ cardImage }
+            alt={ cardName }
+            data-testid="image-card"
+          />
+          <div>
+            <p data-testid="description-card">
+              <span className="text1-card">
+                About:
+              </span>
+              <span className="text2-card">
+                { cardDescription }
+              </span>
+            </p>
+            <p data-testid="attr1-card">
+              <span className="text1-card">
+                Strength:
+                { cardAttr1 }
+              </span>
+            </p>
+            <p data-testid="attr2-card">
+              <span className="text1-card">
+                Defense:
+                { cardAttr2 }
+              </span>
+            </p>
+            <p data-testid="attr3-card">
+              <span className="text1-card">
+                Chi:
+                { cardAttr3 }
+              </span>
+            </p>
+            <p data-testid="rare-card">
+              <span className="text1-card">
+                Rarity:
+              </span>
+              <span className="text2-card">
+                { cardRare }
+              </span>
+            </p>
+            <div className="text3-card">
+              {!cardTrunfo ? '' : <p data-testid="trunfo-card">Super Trunfo</p>}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

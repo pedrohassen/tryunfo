@@ -140,58 +140,75 @@ class App extends Component {
     return (
       <main className="main-container">
         <h1 className="title">Super-Tryunfo</h1>
-        <Forms
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.saveCard }
-          nameFilter={ this.nameFilter }
-          rareFilter={ this.rareFilter }
-          superFilter={ this.superFilter }
-          disabled={ disabled }
-        />
-        <Cards
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-        {cards.filter((card) => card.cardTrunfo === superFilter || card.cardTrunfo)
-          .filter((card) => card.cardRare.startsWith(rareFilter))
-          .filter((card) => card.cardName.includes(nameFilter)).map((card) => (
-            <div key={ card.cardName }>
+        <div className="divide-screen">
+          <Forms
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            hasTrunfo={ hasTrunfo }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.saveCard }
+            nameFilter={ this.nameFilter }
+            rareFilter={ this.rareFilter }
+            superFilter={ this.superFilter }
+            disabled={ disabled }
+          />
+          <div className="divide-screen-two">
+            <div>
+              <h2 className="card-creation">Card Creation:</h2>
               <Cards
-                cardName={ card.cardName }
-                cardDescription={ card.cardDescription }
-                cardAttr1={ card.cardAttr1 }
-                cardAttr2={ card.cardAttr2 }
-                cardAttr3={ card.cardAttr3 }
-                cardImage={ card.cardImage }
-                cardRare={ card.cardRare }
-                cardTrunfo={ card.cardTrunfo }
+                cardName={ cardName }
+                cardDescription={ cardDescription }
+                cardAttr1={ cardAttr1 }
+                cardAttr2={ cardAttr2 }
+                cardAttr3={ cardAttr3 }
+                cardImage={ cardImage }
+                cardRare={ cardRare }
+                cardTrunfo={ cardTrunfo }
               />
-              <button
-                id={ card.cardName }
-                type="submit"
-                data-testid="delete-button"
-                onClick={ this.deleteCard }
-              >
-                Excluir
-              </button>
             </div>
-          ))}
+            {cards
+              .filter((card) => card.cardTrunfo === superFilter || card.cardTrunfo)
+              .filter((card) => card.cardRare
+                .startsWith(rareFilter))
+              .filter((card) => card.cardName
+                .toLowerCase()
+                .includes(nameFilter.toLowerCase()))
+              .map((card) => (
+                <div className="divide-screen" key={ card.cardName }>
+                  <div className="generated-cards">
+                    <Cards
+                      cardName={ card.cardName }
+                      cardDescription={ card.cardDescription }
+                      cardAttr1={ card.cardAttr1 }
+                      cardAttr2={ card.cardAttr2 }
+                      cardAttr3={ card.cardAttr3 }
+                      cardImage={ card.cardImage }
+                      cardRare={ card.cardRare }
+                      cardTrunfo={ card.cardTrunfo }
+                    />
+                    <div className="delete-card">
+                      <button
+                        className="delete-card"
+                        id={ card.cardName }
+                        type="submit"
+                        data-testid="delete-button"
+                        onClick={ this.deleteCard }
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
       </main>
     );
   }
